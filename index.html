@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html ⚡>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content="This is the AMP Boilerplate." />
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="preload" as="script" href="https://cdn.ampproject.org/v0.js" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Raleway&display=swap"
+      rel="stylesheet"
+    />
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+    <!-- Import other AMP Extensions here -->
+    <script
+      async
+      custom-element="amp-carousel"
+      src="https://cdn.ampproject.org/v0/amp-carousel-0.1.js"
+    ></script>
+    <script
+      async
+      custom-template="amp-mustache"
+      src="https://cdn.ampproject.org/v0/amp-mustache-0.1.js"
+    ></script>
+    <script
+      async
+      custom-element="amp-animation"
+      src="https://cdn.ampproject.org/v0/amp-animation-0.1.js"
+    ></script>
+    <script
+      async
+      custom-element="amp-list"
+      src="https://cdn.ampproject.org/v0/amp-list-0.1.js"
+    ></script>
+    <script
+      async
+      custom-element="amp-position-observer"
+      src="https://cdn.ampproject.org/v0/amp-position-observer-0.1.js"
+    ></script>
+    <script
+      async
+      custom-element="amp-font"
+      src="https://cdn.ampproject.org/v0/amp-font-0.1.js"
+    ></script>
+    <style amp-custom>
+      body {
+        min-height: 100vh;
+        max-width: 100vw;
+        overflow: hidden;
+        font-family: "Raleway", sans-serif;
+      }
+      div#target-id {
+        background-color: red;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      header {
+        background-color: #222;
+        line-height: 50px;
+        padding: 10px 40px 10px 20px;
+        color: white;
+        display: flex;
+        justify-content: space-between;
+        font-size: 40pt;
+        user-select: none;
+        -webkit-user-select: none;
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      header .snackbar {
+        cursor: pointer;
+        transform: scale(1.5);
+        transform-origin: center;
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      .right-menu {
+        box-sizing: border-box;
+        background-color: #c6e2ba;
+        position: fixed;
+        z-index: 1000;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 50%;
+        border-left: 4px solid #222;
+        transform: translateX(100%);
+        padding: 0 20px;
+        user-select: none;
+        -webkit-user-select: none;
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      .wrap {
+        max-width: 100vw;
+        overflow: hidden;
+      }
+
+      .right-menu .exit {
+        margin: 0;
+        padding: 0;
+        color: black;
+        font-size: 40pt;
+        user-select: none;
+        -webkit-user-select: none;
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      .right-menu p {
+        cursor: pointer;
+        user-select: none;
+        -webkit-user-select: none;
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      .intro {
+        position: relative;
+        height: 100vh;
+        background-position: center;
+        background-size: cover;
+        background-color: #222;
+      }
+
+      .intro:before {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+      }
+
+      #intro-img {
+        position: relative;
+        width: auto;
+        left: 50%;
+        transform: translateX(-50%);
+        filter: opacity(0.6);
+        max-height: 100%;
+        object-fit: cover;
+      }
+
+      .intro .title {
+        position: absolute;
+        margin: 0;
+        padding: 0 20px;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        font-size: 36pt;
+        font-weight: bold;
+        color: white;
+        opacity: 1;
+        z-index: 1;
+      }
+
+      .why {
+        margin: 0;
+        padding: 20px 40px;
+        background-color: #222;
+        color: #c6e2ba;
+        text-align: center;
+      }
+
+      .why .why-us {
+        margin: 0 0 40px;
+        font-size: 26pt;
+        font-weight: bold;
+        letter-spacing: 2px;
+      }
+
+      .why .symbol {
+        font-size: 50pt;
+        margin: 60px 0 20px;
+      }
+
+      .why .desc {
+        font-size: 14pt;
+        font-weight: bold;
+      }
+
+      .decision {
+        margin: 0;
+        padding: 20px 40px;
+        background-color: #c6e2ba;
+        text-align: center;
+      }
+
+      .decision .example {
+        margin-bottom: 60px;
+      }
+
+      .decision .title {
+        font-size: 26pt;
+        font-weight: bold;
+        letter-spacing: 2px;
+      }
+
+      .decision .subtitle {
+        font-size: 14pt;
+        font-weight: bold;
+      }
+
+      .decision .desc {
+        font-size: 14pt;
+      }
+      .results {
+        overflow: hidden;
+        background-color: #222;
+        padding: 40px;
+      }
+
+      .results .title {
+        color: #c6e2ba;
+        font-size: 26pt;
+        font-weight: bold;
+        letter-spacing: 2px;
+        text-align: center;
+      }
+
+      .results .card {
+        background-color: #c6e2ba;
+        margin-bottom: 40px;
+        padding: 20px 0;
+        transform: translateX(-100vw);
+        overflow: hidden;
+      }
+
+      .results .card .card-img {
+        display: block;
+        border-radius: 50%;
+        margin: 0 auto;
+        transform: translateY(-100vh);
+      }
+
+      .card:nth-of-type(even) {
+        transform: translateX(100vw);
+      }
+
+      .results .card .card-desc {
+        color: #222;
+        padding: 0 40px;
+        font-size: 14pt;
+        text-align: center;
+        transform: translateY(100vh);
+      }
+
+      .results .card .sign {
+        text-align: center;
+        font-weight: bold;
+        transform: translateY(100vh);
+      }
+
+      .gallery {
+        padding: 20px 40px;
+        background-color: #c6e2ba;
+        text-align: center;
+      }
+
+      .gallery amp-carousel {
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+
+      .gallery .title {
+        font-size: 26pt;
+        font-weight: bold;
+        letter-spacing: 2px;
+        text-align: center;
+      }
+
+      .pricing {
+        padding: 40px 40px;
+        background-color: #222;
+        color: white;
+        text-align: center;
+      }
+      .pricing .option {
+        background-color: #98bb89;
+        padding: 40px 20px;
+        margin-bottom: 40px;
+      }
+
+      .pricing .option .title {
+        font-size: 16pt;
+        font-weight: bold;
+        letter-spacing: 1px;
+      }
+      .pricing .option .price {
+        font-size: 22pt;
+        font-weight: bold;
+        letter-spacing: 2px;
+        margin-bottom: 0;
+      }
+      .pricing .option .sub-price {
+        margin-top: 5px;
+      }
+      .pricing .option .perk {
+        padding-bottom: 10px;
+        margin-left: 20px;
+        margin-right: 20px;
+        border-bottom: 2px solid white;
+      }
+      .pricing .option .perk:last-of-type {
+        border-bottom: none;
+      }
+
+      .pricing .option .book {
+        border: none;
+        padding: 20px 30px;
+        font-weight: bold;
+        letter-spacing: 2px;
+        background-color: #c6e2ba;
+        cursor: pointer;
+        user-select: none;
+        -webkit-user-select: none;
+        -webkit-tap-highlight-color: transparent;
+      }
+      .pricing .option .book:active {
+        background-color: #bbe0ab;
+      }
+
+      .contact {
+        padding: 40px 40px;
+        background-color: #c6e2ba;
+      }
+
+      .contact .title {
+        font-size: 20pt;
+        font-weight: bold;
+        letter-spacing: 1px;
+      }
+      .contact .title:not(:first-of-type) {
+        margin-top: 60px;
+      }
+
+      .contact .text {
+        font-size: 14pt;
+        letter-spacing: 1px;
+      }
+
+      @media (min-width: 400px) {
+        .right-menu {
+          left: calc(100% - 200px);
+        }
+        .decision .example {
+          min-width: 250px;
+          max-width: 400px;
+          margin: 0 auto;
+        }
+
+        .card-list {
+          text-align: center;
+        }
+        .card {
+          min-width: 250px;
+          max-width: 400px;
+          margin: 0 auto;
+        }
+        .option {
+          display: inline-block;
+          min-width: 250px;
+          max-width: 400px;
+          margin-left: 20px;
+          margin-right: 20px;
+        }
+      }
+
+      @media (min-width: 600px) {
+        .contact {
+          display: flex;
+          justify-content: space-around;
+        }
+      }
+    </style>
+
+    <style amp-boilerplate>
+      body {
+        -webkit-animation: -amp-start 8s steps(1, end) 0s 1 normal both;
+        -moz-animation: -amp-start 8s steps(1, end) 0s 1 normal both;
+        -ms-animation: -amp-start 8s steps(1, end) 0s 1 normal both;
+        animation: -amp-start 8s steps(1, end) 0s 1 normal both;
+      }
+
+      @-webkit-keyframes -amp-start {
+        from {
+          visibility: hidden;
+        }
+
+        to {
+          visibility: visible;
+        }
+      }
+
+      @-moz-keyframes -amp-start {
+        from {
+          visibility: hidden;
+        }
+
+        to {
+          visibility: visible;
+        }
+      }
+
+      @-ms-keyframes -amp-start {
+        from {
+          visibility: hidden;
+        }
+
+        to {
+          visibility: visible;
+        }
+      }
+
+      @-o-keyframes -amp-start {
+        from {
+          visibility: hidden;
+        }
+
+        to {
+          visibility: visible;
+        }
+      }
+
+      @keyframes -amp-start {
+        from {
+          visibility: hidden;
+        }
+
+        to {
+          visibility: visible;
+        }
+      }
+    </style>
+    <noscript>
+      <style amp-boilerplate>
+        body {
+          -webkit-animation: none;
+          -moz-animation: none;
+          -ms-animation: none;
+          animation: none;
+        }
+      </style>
+    </noscript>
+
+    <link rel="canonical" href="./index.html" />
+    <title>Offer</title>
+  </head>
+  <body>
+    <amp-animation id="snackbarSlideIn" layout="nodisplay">
+      <script type="application/json">
+        {
+          "selector": "#menu",
+          "duration": ".5s",
+          "iterations": "1",
+          "fill": "forwards",
+          "direction": "alternate",
+          "animations": [
+            {
+              "selector": "#menu",
+              "easing": "cubic-bezier(0,0,.21,1)",
+              "keyframes": {
+                "transform": "translateX(0)"
+              }
+            }
+          ]
+        }
+      </script>
+    </amp-animation>
+    <amp-animation id="snackbarSlideInReverse" layout="nodisplay">
+      <script type="application/json">
+        {
+          "selector": "#menu",
+          "duration": ".5s",
+          "iterations": "1",
+          "fill": "forwards",
+          "direction": "alternate",
+          "animations": [
+            {
+              "selector": "#menu",
+              "easing": "cubic-bezier(0,0,.21,1)",
+              "keyframes": {
+                "transform": "translateX(100%)"
+              }
+            }
+          ]
+        }
+      </script>
+    </amp-animation>
+    <amp-animation id="optionsSlideIn" layout="nodisplay">
+      <script type="application/json">
+        {
+          "selector": ".card",
+          "duration": "1s",
+          "iterations": "1",
+          "fill": "forwards",
+          "direction": "alternate",
+          "animations": [
+            {
+              "selector": ".card",
+              "easing": "cubic-bezier(0,0,.21,1)",
+              "keyframes": {
+                "transform": "translateX(0)"
+              }
+            },
+            {
+              "selector": ".card-img",
+              "easing": "cubic-bezier(0,0,.21,1)",
+              "delay": ".2s",
+              "keyframes": {
+                "transform": "translateY(0)"
+              }
+            },
+            {
+              "selector": ".card-desc",
+              "easing": "cubic-bezier(0,0,.21,1)",
+              "delay": ".2s",
+              "keyframes": {
+                "transform": "translateY(0)"
+              }
+            },
+            {
+              "selector": ".sign",
+              "easing": "cubic-bezier(0,0,.21,1)",
+              "delay": ".2s",
+              "keyframes": {
+                "transform": "translateY(0)"
+              }
+            }
+          ]
+        }
+      </script>
+    </amp-animation>
+    <div class="wrap">
+      <header id="intro">
+        <div class="logo">T</div>
+        <div
+          role="button"
+          tabindex
+          class="snackbar"
+          on="tap:snackbarSlideIn.start"
+        >
+          =
+        </div>
+      </header>
+      <section class="intro">
+        <amp-img
+          id="intro-img"
+          data-hero
+          src="./pictures/reach.jpg"
+          width="178vh"
+          height="100vh"
+          alt="reach"
+        ></amp-img>
+        <p class="title">Reach Your Goals In a Few Months</p>
+      </section>
+      <section id="why-us" class="why">
+        <p class="why-us">Why us?</p>
+        <div class="because">
+          <p class="symbol">🏆</p>
+          <p class="desc">Lorem ipsum dolor sit.</p>
+        </div>
+        <div class="because">
+          <p class="symbol">🥇</p>
+          <p class="desc">Mauris dapibus augue at rutrum facilisis.</p>
+        </div>
+        <div class="because">
+          <p class="symbol">💎</p>
+          <p class="desc">Aenean egestas purus id.</p>
+        </div>
+        <div class="because">
+          <p class="symbol">🎀</p>
+          <p class="desc">Etiam tristique nunc.</p>
+        </div>
+        <div class="because">
+          <p class="symbol">🔔</p>
+          <p class="desc">Fusce tincidunt odio metus.</p>
+        </div>
+        <div class="because">
+          <p class="symbol">🔑</p>
+          <p class="desc">Nulla tincidunt dolor.</p>
+        </div>
+        <div class="because">
+          <p class="symbol">💰</p>
+          <p class="desc">Nunc eu hendrerit ex.</p>
+        </div>
+      </section>
+      <section id="decision" class="decision">
+        <p class="title">It's your decision</p>
+        <div class="example">
+          <p class="subtitle">Lorem</p>
+          <p class="desc">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus
+            eaque at commodi quae molestiae, nemo dicta iure vel in voluptates
+            sapiente voluptas nobis tempora, id ut.
+          </p>
+        </div>
+        <div class="example">
+          <p class="subtitle">Dicta</p>
+          <p class="desc">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus
+            eaque at commodi quae molestiae, nemo dicta iure vel in voluptates
+            sapiente voluptas nobis tempora, id ut.
+          </p>
+        </div>
+        <div class="example">
+          <p class="subtitle">Sit</p>
+          <p class="desc">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus
+            eaque at commodi quae molestiae, nemo dicta iure vel in voluptates
+            sapiente voluptas nobis tempora, id ut.
+          </p>
+        </div>
+        <div class="example">
+          <p class="subtitle">Ipsum dolor</p>
+          <p class="desc">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus
+            eaque at commodi quae molestiae, nemo dicta iure vel in voluptates
+            sapiente voluptas nobis tempora, id ut.
+          </p>
+        </div>
+      </section>
+      <section id="our-options" class="results">
+        <p class="title">Know our options</p>
+        <amp-position-observer
+          on="enter:optionsSlideIn.start"
+          layout="nodisplay"
+        >
+        </amp-position-observer>
+        <amp-list
+          class="card-list"
+          width="auto"
+          height="100"
+          layout="fixed-height"
+          src="./data/items.json"
+        >
+          <template type="amp-mustache">
+            <div class="card">
+              <amp-img
+                class="card-img"
+                src="{{img}}"
+                width="150"
+                height="150"
+                layout="fixed"
+              >
+              </amp-img>
+              <p class="card-desc">{{text}}</p>
+              <p class="sign">{{option}}</p>
+            </div>
+          </template>
+        </amp-list>
+      </section>
+      <section id="photos" class="gallery">
+        <p class="title">Photo Gallery</p>
+        <amp-carousel
+          width="450"
+          height="300"
+          layout="responsive"
+          type="slides"
+          role="region"
+          loop
+          aria-label="Basic carousel"
+        >
+          <amp-img
+            src="./pictures/laptop-336373_1024.jpg"
+            width="auto"
+            height="1000"
+          ></amp-img>
+          <amp-img
+            src="./pictures/meeting-1245776_1024.jpg"
+            width="auto"
+            height="1000"
+          ></amp-img>
+          <amp-img
+            src="./pictures/people-1979261_1024.jpg"
+            width="auto"
+            height="1000"
+          ></amp-img>
+          <amp-img
+            src="./pictures/startup-593341_1024.jpg"
+            width="auto"
+            height="1000"
+          ></amp-img>
+        </amp-carousel>
+      </section>
+      <section id="pricing" class="pricing">
+        <amp-list
+          width="auto"
+          height="100"
+          layout="fixed-height"
+          src="./data/options.json"
+        >
+          <template type="amp-mustache">
+            <div class="option">
+              <p class="title">{{title}}</p>
+              <p class="price">{{price}}</p>
+              <p class="sub-price">per {{sub-price}}</p>
+              <p class="perk">{{perk1}}</p>
+              <p class="perk">{{perk2}}</p>
+              <p class="perk">{{perk3}}</p>
+              <button class="book">Book now</button>
+            </div>
+          </template>
+        </amp-list>
+      </section>
+      <section id="contact" class="contact">
+        <div>
+          <p class="title">Contact</p>
+          <p class="text">Email: email@email.com</p>
+          <p class="text">Phone: +40 123 123 123</p>
+        </div>
+        <div>
+          <p class="title">Address</p>
+          <p class="text">99 Street Name</p>
+          <p class="text">City, State, Zip-Code</p>
+        </div>
+      </section>
+    </div>
+    <div id="menu" class="right-menu">
+      <p
+        tabindex
+        role="button"
+        class="exit"
+        on="tap:snackbarSlideInReverse.start"
+      >
+        x
+      </p>
+      <p tabindex role="button" on="tap:intro.scrollTo">Intro</p>
+      <p tabindex role="button" on="tap:why-us.scrollTo">Why us?</p>
+      <p tabindex role="button" on="tap:decision.scrollTo">Decision</p>
+      <p tabindex role="button" on="tap:our-options.scrollTo">Our options</p>
+      <p tabindex role="button" on="tap:photos.scrollTo">Photo gallery</p>
+      <p tabindex role="button" on="tap:pricing.scrollTo">Pricing</p>
+      <p tabindex role="button" on="tap:contact.scrollTo">Contact</p>
+    </div>
+  </body>
+</html>
